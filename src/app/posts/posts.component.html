@@ -1,0 +1,43 @@
+<form method="get" action="">
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input [(ngModel)]="post.title" id="title" class="form-control" type="text" name="title" placeholder="Title">
+    </div>
+    <div class="form-group">
+        <label for="body">Body</label>
+        <textarea [(ngModel)]="post.body" id="body" class="form-control" type="text" name="body" placeholder="Body"></textarea>
+    </div>
+
+    <button class="btn btn-primary mx-1" [hidden]="isHidden" (click)="addPost()" type="button">Ajouter</button>
+    <button class="btn btn-success mx-1" [hidden]="!isHidden" (click)="updatePost()" type="button">Update</button>
+</form>
+<div class="responsive-table" style="overflow: hidden;overflow-y: scroll;height: 400px;">
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>user Id</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Afficher</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of posts">
+                <th>{{ post.id }}</th>
+                <td>{{ post.userId }}</td>
+                <td>{{ post.title | slice:0:13 }}</td>
+                <td>{{ post.body | slice:0:25 }}</td>
+                <td><button type="button" class="btn btn-outline-primary" [routerLink]="post.id" 
+                     [queryParams]="{ userId: post.userId, title: post.title }" >Afficher</button></td>
+                <td><button type="button" (click)="editPost(post)" class="btn btn-outline-success">Edit</button></td>
+                <td><button type="button" (click)="deletePost(post)" class="btn btn-outline-danger">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<button (click)="lunch()">console</button>

@@ -1,0 +1,104 @@
+<form #myform="ngForm" (ngSubmit)="submit(myform)">
+
+    <div ngModelGroup="contact">
+        <div class="form-group">
+            <label for="firstname">
+                First Name
+            </label>
+            <input 
+                required minlength="3"
+                [class.is-invalid]="firstName.invalid && firstName.touched"
+                maxlength="10" 
+                pattern="[a-zA-Z]+" 
+                type="text" 
+                ngModel name="firstname" 
+                #firstName="ngModel" 
+                (change)="log(firstName)" 
+                id="firstname" 
+                class="form-control" 
+                placeholder="First Name">
+    
+            <div 
+                class="alert alert-danger"
+                *ngIf="firstName.touched && firstName.invalid">
+    
+                <div 
+                    *ngIf="firstName.errors.required">
+                        ce champ est obligatoire
+                </div>
+                <div 
+                    *ngIf="firstName.errors.minlength">
+                        ce champ doit etre {{ firstName.errors.minlength.actualLength }} / {{ firstName.errors.minlength.requiredLength }} caracter et plus
+                </div>
+                <div 
+                    *ngIf="firstName.errors.pattern">
+                        ce champ accept uniqment les caractere
+                </div>
+    
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="lastname">
+                Last Name
+            </label>
+            <input 
+                type="text"
+                ngModel name="lastname"
+               #lastname  id="lastname"
+               class="form-control"
+               placeholder="Last Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="comment">
+            Comentaire
+        </label>
+        <textarea
+            ngModel name="comment"
+            #comment 
+            id="comment"
+            class="form-control"
+            placeholder="Commentaire" 
+            rows="4">
+        </textarea>
+    </div>
+
+    <div class="formgroup">
+        <label for="pays">Pays </label>
+        <select class="form-control" ngModel #pays name="pays" id="pays">
+            <option value="maroc">maroc</option>
+            <option value="france">france</option>
+        </select>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ngModel #abonner name="abonner" id="abonner"> S'abonner
+        </label>
+    </div>
+
+    <div class="radio">
+        <label for="">
+            <input type="radio" ngModel #regle name="regle" id="regle1" value="1">
+            accepte regle 1
+        </label>
+    </div>
+
+    <div class="radio">
+        <label for="">
+            <input type="radio" ngModel #regle name="regle" id="regle2" value="2">
+            accepte regle 2
+        </label>
+    </div>
+
+    <button type="submit" [disabled]="!myform.valid" class="btn btn-primary">
+        Ajouter un Commentaire
+    </button>
+
+</form>
+
+<p>
+    {{ myform.value | json }}
+</p>

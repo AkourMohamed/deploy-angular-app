@@ -1,0 +1,24 @@
+<h2>Post And User Information :</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <h5 class="card-header">User ID : {{userId}} - Post Id : #{{postId}}</h5>
+            <div class="card-body">
+                <p class="card-text">{{title}}</p>
+                <button type="button" class="btn btn-primary" (click)="redirectToTest()">Redirect To Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+<h2>All Comments :</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card my-1" *ngFor="let comment of comments">
+            <h5 class="card-header">#{{ comment.id }} - {{ comment.name }}</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{  comment.email }}</h5>
+              <p class="card-text">{{  comment.body }}</p>
+            </div>
+        </div>
+    </div>
+</div>
